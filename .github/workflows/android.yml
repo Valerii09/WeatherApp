@@ -1,6 +1,6 @@
 name: Android CI
 
-on: master
+on: [push]
 
 jobs:
   build:
