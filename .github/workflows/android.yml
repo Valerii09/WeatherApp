@@ -1,0 +1,29 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 1.8
+
+      - name: Build and test Android app
+        run: |
+          # Установка Gradle Wrapper
+          ./gradlew wrapper --gradle-version=7.1.1
+          
+          # Сборка и тестирование проекта
+          ./gradlew build
+          
+          # Запуск приложения 
+          ./gradlew installDebug
