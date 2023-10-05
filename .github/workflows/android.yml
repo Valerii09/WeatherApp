@@ -17,13 +17,19 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Build and test Android app
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build and test
         run: |
-          # Установка Gradle Wrapper
-          ./gradlew wrapper --gradle-version=7.1.1
-          
-          # Сборка и тестирование проекта
-          ./gradlew build
-          
-          # Запуск приложения 
-          ./gradlew installDebug
+          ./gradlew check
+          ./gradlew test
+
+      - name: Package APK
+        run: ./gradlew bundleRelease
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release-bundle
+          path: app/build/outputs/bundle/release/app-release.aab
