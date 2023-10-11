@@ -15,6 +15,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: WeatherViewModel
@@ -96,60 +100,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI(weatherData: WeatherData) {
         // Обновите текстовые поля с данными о погоде
-        val latitudeTextView = findViewById<TextView>(R.id.latitudeTextView)
-        latitudeTextView.text = "Latitude: ${weatherData.latitude}"
 
-        val longitudeTextView = findViewById<TextView>(R.id.longitudeTextView)
-        longitudeTextView.text = "Longitude: ${weatherData.longitude}"
-
-        val generationTimeTextView = findViewById<TextView>(R.id.generationTimeTextView)
-        generationTimeTextView.text = "Generation Time (ms): ${weatherData.generationtime_ms}"
-
-        val utcOffsetTextView = findViewById<TextView>(R.id.utcOffsetTextView)
-        utcOffsetTextView.text = "UTC Offset (seconds): ${weatherData.utc_offset_seconds}"
-
-        val timezoneTextView = findViewById<TextView>(R.id.timezoneTextView)
-        timezoneTextView.text = "Timezone: ${weatherData.timezone}"
-
-        val timezoneAbbreviationTextView = findViewById<TextView>(R.id.timezoneAbbreviationTextView)
-        timezoneAbbreviationTextView.text = "Timezone Abbreviation: ${weatherData.timezone_abbreviation}"
-
-        val elevationTextView = findViewById<TextView>(R.id.elevationTextView)
-        elevationTextView.text = "Elevation: ${weatherData.elevation}"
 
         val currentWeatherUnits = weatherData.current_weather_units
         val currentWeather = weatherData.current_weather
         val dailyUnits = weatherData.daily_units
         val dailyWeather = weatherData.daily
 
-        // Обновите поля для текущей погоды
-        val currentWeatherTimeTextView = findViewById<TextView>(R.id.currentWeatherTimeTextView)
-        currentWeatherTimeTextView.text = "Current Weather Time: ${currentWeather.time}"
 
         val currentWeatherTemperatureTextView = findViewById<TextView>(R.id.currentWeatherTemperatureTextView)
-        currentWeatherTemperatureTextView.text = "Current Weather Temperature: ${currentWeather.temperature}${currentWeatherUnits.temperature}"
+        currentWeatherTemperatureTextView.text = "${currentWeather.temperature}"
 
         val currentWeatherWindSpeedTextView = findViewById<TextView>(R.id.currentWeatherWindSpeedTextView)
-        currentWeatherWindSpeedTextView.text = "Current Weather Wind Speed: ${currentWeather.windspeed}${currentWeatherUnits.windspeed}"
+        currentWeatherWindSpeedTextView.text = " ${currentWeather.windspeed}"
 
         val currentWeatherWindDirectionTextView = findViewById<TextView>(R.id.currentWeatherWindDirectionTextView)
-        currentWeatherWindDirectionTextView.text = "Current Weather Wind Direction: ${currentWeather.winddirection}${currentWeatherUnits.winddirection}"
+        currentWeatherWindDirectionTextView.text = "${currentWeather.winddirection}"
 
-        // Обновите поля для ежедневной погоды
-        // Здесь вы можете использовать цикл или другой способ для отображения списка данных.
 
-        // Добавьте логи, чтобы убедиться, что данные были установлены
-        Log.d("WeatherApp", "Latitude: ${weatherData.latitude}")
-        Log.d("WeatherApp", "Longitude: ${weatherData.longitude}")
-        Log.d("WeatherApp", "Generation Time (ms): ${weatherData.generationtime_ms}")
-        Log.d("WeatherApp", "UTC Offset (seconds): ${weatherData.utc_offset_seconds}")
-        Log.d("WeatherApp", "Timezone: ${weatherData.timezone}")
-        Log.d("WeatherApp", "Timezone Abbreviation: ${weatherData.timezone_abbreviation}")
-        Log.d("WeatherApp", "Elevation: ${weatherData.elevation}")
-        Log.d("WeatherApp", "Current Weather Time: ${currentWeather.time}")
-        Log.d("WeatherApp", "Current Weather Temperature: ${currentWeather.temperature}${currentWeatherUnits.temperature}")
-        Log.d("WeatherApp", "Current Weather Wind Speed: ${currentWeather.windspeed}${currentWeatherUnits.windspeed}")
-        Log.d("WeatherApp", "Current Weather Wind Direction: ${currentWeather.winddirection}${currentWeatherUnits.winddirection}")
     }
 
 
