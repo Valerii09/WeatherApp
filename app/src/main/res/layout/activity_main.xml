@@ -8,31 +8,111 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/cityTextView"
+        android:id="@+id/latitudeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="City:"
+        android:text="Latitude: "
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
     <TextView
-        android:id="@+id/temperatureTextView"
+        android:id="@+id/longitudeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Temperature:"
-        app:layout_constraintTop_toBottomOf="@+id/cityTextView"
+        android:text="Longitude: "
+        app:layout_constraintTop_toBottomOf="@+id/latitudeTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
 
     <TextView
-        android:id="@+id/conditionTextView"
+        android:id="@+id/generationTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Condition:"
-        app:layout_constraintTop_toBottomOf="@+id/temperatureTextView"
+        android:text="Generation Time (ms): "
+        app:layout_constraintTop_toBottomOf="@+id/longitudeTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/utcOffsetTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UTC Offset (seconds): "
+        app:layout_constraintTop_toBottomOf="@+id/generationTimeTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/timezoneTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timezone: "
+        app:layout_constraintTop_toBottomOf="@+id/utcOffsetTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/timezoneAbbreviationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timezone Abbreviation: "
+        app:layout_constraintTop_toBottomOf="@+id/timezoneTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/elevationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Elevation: "
+        app:layout_constraintTop_toBottomOf="@+id/timezoneAbbreviationTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/currentWeatherTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Weather Time: "
+        app:layout_constraintTop_toBottomOf="@+id/elevationTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/currentWeatherTemperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Weather Temperature: "
+        app:layout_constraintTop_toBottomOf="@+id/currentWeatherTimeTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/currentWeatherWindSpeedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Weather Wind Speed: "
+        app:layout_constraintTop_toBottomOf="@+id/currentWeatherTemperatureTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/currentWeatherWindDirectionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Weather Wind Direction: "
+        app:layout_constraintTop_toBottomOf="@+id/currentWeatherWindSpeedTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />

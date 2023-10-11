@@ -1,19 +1,24 @@
 package com.example.weatherapp.Repository
 
+import android.util.Log
 import com.example.weatherapp.Service.WeatherService
-import com.example.weatherapp.WeatherDataFetchException
-import com.example.weatherapp.WeatherDataNotFoundException
+import com.example.weatherapp.Exception.WeatherDataFetchException
+import com.example.weatherapp.Exception.WeatherDataNotFoundException
+import com.example.weatherapp.Service.ApiConstants
+import com.example.weatherapp.Service.WeatherApi
 import com.example.weatherapp.model.WeatherData
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
+
 class WeatherRepository {
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.open-meteo.com/v1/") // Замените на ваш API URL
+        .baseUrl(ApiConstants.API_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val service = retrofit.create(WeatherService::class.java)
+    private val api = retrofit.create(WeatherApi::class.java)
 
     suspend fun fetchWeatherData(
         latitude: Double,
@@ -25,11 +30,29 @@ class WeatherRepository {
         startDate: String,
         endDate: String
     ): WeatherData {
-        val response = service.getWeather(latitude, longitude, daily, currentWeather, timeformat, timezone, startDate, endDate)
+        try {
+            Log.d("WeatherRepository", "Sending request for latitude: $latitude, longitude: $longitude")
 
-        if (response.isSuccessful) {
-            return response.body() ?: throw WeatherDataNotFoundException()
-        } else {
+            val response = api.getWeather(
+                latitude,
+                longitude,
+                daily,
+                currentWeather,
+                timeformat,
+                timezone,
+                startDate,
+                endDate
+            )
+
+            if (response != null) {
+                Log.d("WeatherRepository", "Received successful response")
+                return response
+            } else {
+                Log.e("WeatherRepository", "Received error response")
+                throw WeatherDataFetchException()
+            }
+        } catch (e: Exception) {
+            Log.e("WeatherRepository", "Error while fetching weather data: $e")
             throw WeatherDataFetchException()
         }
     }
