@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main2)
         val prefs: SharedPreferences = getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
         val savedDateTime = prefs.getString(KEY_CITY, null)
 
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val daily =
-            "weathercode,temperature_2m_max,apparent_temperature_max,windspeed_10m_max,winddirection_10m_dominant,sunrise,sunset"
+            "weathercode,temperature_2m_max,apparent_temperature_max,windspeed_10m_max,winddirection_10m_dominant,sunrise,sunset,uv_index_max"
         val currentWeather = true
         val timeformat = "unixtime"
         val timezone = "GMT"
