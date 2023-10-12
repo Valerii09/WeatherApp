@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     // Имя ключа для сохранения и извлечения значения
     private val KEY_CITY = "city"
-
+    private val KEY_CONTINENT = "continent"
     private lateinit var viewModel: WeatherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,9 +50,7 @@ class MainActivity : AppCompatActivity() {
         // Замените значения широты и долготы на нужные
         val latitude = 55.0
         val longitude = 82.875
-        val geocodingRepository = GeocodingRepository()
         val apiKey = "74723a40510345568e67145a7679f85c" // Замените на свой ключ API
-        val url = "https://api.opencagedata.com/geocode/v1/json?q=$latitude+$longitude&key=$apiKey"
 
         val geocodingService = Retrofit.Builder().baseUrl("https://api.opencagedata.com/")
             .addConverterFactory(GsonConverterFactory.create()).build()
@@ -64,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val geocodingData = response.body()
                     val city = geocodingData?.results?.firstOrNull()?.components?.city
+                    val continent = geocodingData?.results?.firstOrNull()?.components?.continent
 
                     // Обновляем UI с полученным городом
                     runOnUiThread {
@@ -75,6 +74,12 @@ class MainActivity : AppCompatActivity() {
                             editor.apply()
                         } else {
                             // Если город не найден
+                        }
+                        if (!continent.isNullOrBlank()) {
+                            // Сохраняем континент в SharedPreferences
+                            val editor = prefs.edit()
+                            editor.putString(KEY_CONTINENT, continent)
+                            editor.apply()
                         }
 
                     }
@@ -108,6 +113,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI(weatherData: WeatherData) {
+        val prefs = getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
+        val city = prefs.getString(KEY_CITY, "")
+        val continent = prefs.getString(KEY_CONTINENT, "")
+        val timeZone = TimeZone.getTimeZone("$continent/$city")
 
 
         val currentWeather = weatherData.current_weather
@@ -118,7 +127,13 @@ class MainActivity : AppCompatActivity() {
         val currentDateTime = Calendar.getInstance().time
 
         // Форматируйте дату и время в желаемый формат (24-часовой формат)
+        // Создайте SimpleDateFormat с указанием нужного формата и локали
         val dateFormat = SimpleDateFormat("dd MMMM, yyyy HH:mm", Locale.getDefault())
+
+// Установите временную зону в SimpleDateFormat
+        dateFormat.timeZone = timeZone
+
+// Теперь, когда вы вызываете format, время будет отображаться с учетом установленной временной зоны
         val formattedDateTime = dateFormat.format(currentDateTime)
 
         // Установите отформатированную дату и время в TextView
@@ -160,7 +175,7 @@ class MainActivity : AppCompatActivity() {
             val sunsetTimeInSeconds = firstDaySunsetTimestamp2.toLong() // Преобразуем timestamp в Long
 
             // Устанавливаем часовой пояс "Asia/Novosibirsk" (GMT+7)
-            val timeZone = TimeZone.getTimeZone("Asia/Novosibirsk")
+
 
             // Форматтер для форматирования времени в часовой пояс "Asia/Novosibirsk"
             val localFormatter = SimpleDateFormat("HH:mm")
@@ -190,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             val sunsetTimeInSeconds = firstDaySunsetTimestamp.toLong() // Преобразуем timestamp в Long
 
             // Устанавливаем часовой пояс "Asia/Novosibirsk" (GMT+7)
-            val timeZone = TimeZone.getTimeZone("Asia/Novosibirsk")
+
 
             // Форматтер для форматирования времени в часовой пояс "Asia/Novosibirsk"
             val localFormatter = SimpleDateFormat("HH:mm")
