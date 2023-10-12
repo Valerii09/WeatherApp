@@ -45,6 +45,7 @@ class WeatherRepository {
             )
 
             if (response != null) {
+                Log.d("WeatherRepository", "Response data: $response")
                 Log.d("WeatherRepository", "Received successful response")
                 return response
             } else {

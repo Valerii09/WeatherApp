@@ -1,12 +1,16 @@
 package com.example.weatherapp
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.Service.GeocodingService
+import com.example.weatherapp.Utils.Util
 import com.example.weatherapp.ViewModel.WeatherViewModel
 import com.example.weatherapp.data.Geocoding.GeocodingRepository
 import com.example.weatherapp.model.DailyWeather
@@ -18,17 +22,24 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
 class MainActivity : AppCompatActivity() {
+    private val PREFS_FILENAME = "weather_app_prefs"
+
+    // Имя ключа для сохранения и извлечения значения
+    private val KEY_CITY = "city"
+
     private lateinit var viewModel: WeatherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val prefs: SharedPreferences = getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
+        val savedDateTime = prefs.getString(KEY_CITY, null)
 
 
         viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
@@ -59,6 +70,9 @@ class MainActivity : AppCompatActivity() {
                         if (!city.isNullOrBlank()) {
                             val cityTextView = findViewById<TextView>(R.id.cityTextView)
                             cityTextView.text = "City: $city"
+                            val editor = prefs.edit()
+                            editor.putString(KEY_CITY, city)
+                            editor.apply()
                         } else {
                             // Если город не найден
                         }
@@ -98,6 +112,27 @@ class MainActivity : AppCompatActivity() {
 
         val currentWeather = weatherData.current_weather
 
+        val tvDateTime = findViewById<TextView>(R.id.tv_date_time)
+
+        // Получите текущую дату и время
+        val currentDateTime = Calendar.getInstance().time
+
+        // Форматируйте дату и время в желаемый формат (24-часовой формат)
+        val dateFormat = SimpleDateFormat("dd MMMM, yyyy HH:mm", Locale.getDefault())
+        val formattedDateTime = dateFormat.format(currentDateTime)
+
+        // Установите отформатированную дату и время в TextView
+        tvDateTime.text = formattedDateTime
+        val ivWeatherCondition = findViewById<ImageView>(R.id.iv_weather_condition)
+
+// Установите изображение программно
+        ivWeatherCondition.setImageResource(R.drawable.haze)
+
+        val weatherCode = Util.getWeatherInfo(weatherData.current_weather.weathercode)
+        val tvWeatherCondition = findViewById<TextView>(R.id.tv_weather_condition)
+        tvWeatherCondition.text = weatherCode
+        Log.d("WeatherApp", "Weathercode: $weatherCode")
+
 
         val currentWeatherTemperatureTextView =
             findViewById<TextView>(R.id.currentWeatherTemperatureTextView)
@@ -108,37 +143,15 @@ class MainActivity : AppCompatActivity() {
         val currentWeatherWindSpeedTextView =
             findViewById<TextView>(R.id.currentWeatherWindSpeedTextView)
         val windSpeed = currentWeather.windspeed
-        currentWeatherWindSpeedTextView.text = "$windSpeed"
+        currentWeatherWindSpeedTextView.text = "$windSpeed km/h"
         Log.d("WeatherApp", "Wind Speed: $windSpeed")
 
         val currentWeatherWindDirectionTextView =
             findViewById<TextView>(R.id.currentWeatherWindDirectionTextView)
         val windDirection = currentWeather.winddirection
-        currentWeatherWindDirectionTextView.text = "$windDirection"
+        currentWeatherWindDirectionTextView.text = "$windDirection°"
         Log.d("WeatherApp", "Wind Direction: $windDirection")
 
-        // Добавьте обновления для Relative Humidity (2 m), Sea Level Pressure, Sunrise и Sunset
-        val currentRelativeHumidityTextView = findViewById<TextView>(R.id.tv_humidity_value)
-        val relativeHumidity = currentWeather.relativehumidity_2m
-        currentRelativeHumidityTextView.text = "$relativeHumidity"
-        Log.d("WeatherApp", "Relative Humidity: $relativeHumidity")
-
-        val currentPressureMslTextView = findViewById<TextView>(R.id.tv_pressure_value)
-        val pressureMsl = currentWeather.pressure_msl
-        currentPressureMslTextView.text = "$pressureMsl"
-        Log.d("WeatherApp", "Sea Level Pressure: $pressureMsl")
-
-
-
-
-//        val currentSunrise = findViewById<TextView>(R.id.tv_sunrise_time)
-//        val dailyWeather = weatherData.daily
-//        val firstDaySunriseTimestamp = dailyWeather.sunrise
-//        currentSunrise.text = "$firstDaySunriseTimestamp"
-//        Log.d("WeatherApp", "Sunrise: $firstDaySunriseTimestamp")
-//
-//        val sunriseTimeStr = "2023-10-11T00:51" // Пример строки времени восхода
-//
         val dailyWeather2 = weatherData.daily
         val firstDaySunsetTimestamp2 = dailyWeather2.sunrise[7]
         Log.d("WeatherApp", "Sunset time (timestamp): $firstDaySunsetTimestamp2")

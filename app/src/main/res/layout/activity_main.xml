@@ -58,13 +58,13 @@
         android:id="@+id/iv_weather_condition"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="52dp"
         android:contentDescription="@string/description_weather_condition_icon"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toTopOf="@id/currentWeatherTemperatureTextView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/haze" />
 
     <TextView
@@ -84,52 +84,16 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="114dp" />
 
-    <TextView
-        android:id="@+id/tv_humidity_label"
-        style="@style/LabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
-        android:text="@string/label_humidity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_humidity_value"
-        style="@style/DefaultTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/guideline_value_start"
-        app:layout_constraintTop_toTopOf="@+id/tv_humidity_label"
-        tools:text="70%" />
-
-    <TextView
-        android:id="@+id/tv_pressure_label"
-        style="@style/LabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/label_pressure"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_humidity_label" />
-
-    <TextView
-        android:id="@+id/tv_pressure_value"
-        style="@style/DefaultTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guideline_value_start"
-        app:layout_constraintTop_toTopOf="@+id/tv_pressure_label"
-        tools:text="1001 mBar" />
 
     <TextView
         android:id="@+id/tv_wind_speed"
+        style="@style/LabelStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="184dp"
         android:text="@string/label_visibility"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_pressure_label" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/currentWeatherWindSpeedTextView"
@@ -142,6 +106,7 @@
 
     <TextView
         android:id="@+id/tv_wind_direction"
+        style="@style/LabelStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
