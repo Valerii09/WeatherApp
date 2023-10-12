@@ -1,6 +1,6 @@
-package com.example.weatherapp.Service
+package com.example.weatherapp.Service.Api
 
-import com.example.weatherapp.data.Geocoding.GeocodingData
+import com.example.weatherapp.view.geocoding.GeocodingData
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

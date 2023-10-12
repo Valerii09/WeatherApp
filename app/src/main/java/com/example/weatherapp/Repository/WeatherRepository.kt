@@ -1,11 +1,9 @@
 package com.example.weatherapp.Repository
 
 import android.util.Log
-import com.example.weatherapp.Service.WeatherService
 import com.example.weatherapp.Exception.WeatherDataFetchException
-import com.example.weatherapp.Exception.WeatherDataNotFoundException
-import com.example.weatherapp.Service.ApiConstants
-import com.example.weatherapp.Service.WeatherApi
+import com.example.weatherapp.Service.Api.ApiConstants
+import com.example.weatherapp.Service.Api.WeatherApi
 import com.example.weatherapp.model.WeatherData
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

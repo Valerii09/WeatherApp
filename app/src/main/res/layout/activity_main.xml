@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:textSize="20dp"
+        android:textSize="22dp"
         android:textColor="@color/white"
         android:id="@+id/cityTextView"
         android:layout_width="wrap_content"
@@ -43,6 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
+        android:textSize="20dp"
         android:textColor="@color/white"
         android:id="@+id/tv_weather_condition"
         android:layout_width="wrap_content"
@@ -66,7 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Detail"
+            android:text="  Detail"
             android:textStyle="italic" />
         <TableRow>
             <TextView
@@ -87,6 +88,7 @@
                 android:src="@drawable/ic_sunrise2" />
 
             <TextView
+                android:textSize="18dp"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:id="@+id/tv_sunrise_time"
@@ -106,6 +108,7 @@
                 android:src="@drawable/ic_sunset2" />
 
             <TextView
+                android:textSize="18dp"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:id="@+id/tv_sunset_time"
@@ -132,6 +135,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_uv_index_max" />
             <TextView
+                android:textSize="18dp"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:id="@+id/uv_index"
@@ -152,6 +156,7 @@
 
 
             <TextView
+                android:textSize="18dp"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:id="@+id/rain_sum"
@@ -164,6 +169,7 @@
     </TableLayout>
 
     <TextView
+        android:textSize="20dp"
         android:textStyle="italic"
         android:textColor="@color/white"
         android:id="@+id/tv_date_time"
@@ -188,7 +194,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Wind info"
+            android:text="  Wind info"
             android:textStyle="italic" />
         <TableRow>
             <TextView
@@ -214,6 +220,7 @@
 
 
             <TextView
+                android:textSize="18dp"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:id="@+id/currentWeatherWindSpeedTextView"
@@ -223,6 +230,7 @@
                 android:text="@string/label_visibility" />
 
             <TextView
+                android:textSize="18dp"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:id="@+id/currentWeatherWindDirectionTextView"

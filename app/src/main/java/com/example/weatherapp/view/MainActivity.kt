@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.view
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,15 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatherapp.Service.GeocodingService
+import com.example.weatherapp.R
+import com.example.weatherapp.Service.Api.GeocodingService
 import com.example.weatherapp.Utils.Util
 import com.example.weatherapp.ViewModel.WeatherViewModel
-import com.example.weatherapp.data.Geocoding.GeocodingRepository
-import com.example.weatherapp.model.DailyWeather
 import com.example.weatherapp.model.WeatherData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -241,6 +239,11 @@ class MainActivity : AppCompatActivity() {
         Log.d("WeatherApp", "uv_index: ${rain}")
         val rainTextView = findViewById<TextView>(R.id.rain_sum)
         rainTextView.text = "Rain sum\n$rain"
+
+        val weathercode = weatherData.current_weather.weathercode
+        Log.d("WeatherApp", "weathercode: ${weathercode}")
+        val weatherCondition = findViewById<TextView>(R.id.tv_weather_condition)
+        weatherCondition.text = Util.getWeatherInfo(weathercode)
 
 
     }

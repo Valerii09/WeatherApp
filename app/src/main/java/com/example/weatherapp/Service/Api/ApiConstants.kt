@@ -1,4 +1,4 @@
-package com.example.weatherapp.Service
+package com.example.weatherapp.Service.Api
 
 object ApiConstants {
     const val API_BASE_URL = "https://api.open-meteo.com/v1/"

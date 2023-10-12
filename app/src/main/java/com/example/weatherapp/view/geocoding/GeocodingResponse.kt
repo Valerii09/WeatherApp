@@ -1,6 +1,6 @@
-package com.example.weatherapp.data.Geocoding
+package com.example.weatherapp.view.geocoding
 
-import com.example.weatherapp.Service.GeocodingService
+import com.example.weatherapp.Service.Api.GeocodingService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

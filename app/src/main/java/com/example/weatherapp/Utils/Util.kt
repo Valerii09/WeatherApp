@@ -9,8 +9,8 @@ object Util {
         return  when(code){
             0 -> "Clear sky"
             1 -> "Mainly clear"
-            2 -> "partly cloudy"
-            3 -> "overcast"
+            2 -> "Partly cloudy"
+            3 -> "Overcast clouds"
             45, 48 -> "Fog"
             51, 53, 55,
             -> "Drizzle"
