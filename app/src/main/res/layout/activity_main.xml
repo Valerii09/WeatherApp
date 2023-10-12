@@ -56,13 +56,13 @@
 
     <ImageView
         android:id="@+id/iv_weather_condition"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="109dp"
+        android:layout_height="82dp"
         android:layout_marginTop="52dp"
         android:contentDescription="@string/description_weather_condition_icon"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/haze" />
@@ -71,10 +71,12 @@
         android:id="@+id/tv_weather_condition"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_weather_condition"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/iv_weather_condition"
         tools:text="broken cloud" />
 
     <androidx.constraintlayout.widget.Guideline
