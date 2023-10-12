@@ -1,8 +1,5 @@
 package com.example.weatherapp.Utils
 
-import java.text.SimpleDateFormat
-import java.util.Locale
-
 object Util {
 
     fun getWeatherInfo(code:Int):String{

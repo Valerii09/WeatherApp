@@ -42,14 +42,9 @@ class WeatherRepository {
                 endDate
             )
 
-            if (response != null) {
-                Log.d("WeatherRepository", "Response data: $response")
-                Log.d("WeatherRepository", "Received successful response")
-                return response
-            } else {
-                Log.e("WeatherRepository", "Received error response")
-                throw WeatherDataFetchException()
-            }
+            Log.d("WeatherRepository", "Response data: $response")
+            Log.d("WeatherRepository", "Received successful response")
+            return response
         } catch (e: Exception) {
             Log.e("WeatherRepository", "Error while fetching weather data: $e")
             throw WeatherDataFetchException()

@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_width="match_parent"
-    android:background="@drawable/clear_day_bg"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/clear_day_bg">
 
     <TextView
-        android:textSize="22dp"
-        android:textColor="@color/white"
         android:id="@+id/cityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Novosibirsk"
+        android:text="@string/novosibirsk"
+        android:textColor="@color/white"
+        android:textSize="22sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -28,48 +28,65 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cityTextView"
-        app:srcCompat="@drawable/weather_icon_03d" />
+        app:srcCompat="@drawable/weather_icon_03d"
+        android:contentDescription="@string/todo" />
 
     <TextView
         android:id="@+id/currentWeatherTemperatureTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="7.0 С"
+        android:text="@string/_7_0"
         android:textColor="@color/white"
-        android:textSize="50dp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        android:textSize="20dp"
-        android:textColor="@color/white"
         android:id="@+id/tv_weather_condition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Overcast clouds"
+        android:text="@string/overcast_clouds"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date_time" />
+
+    <TextView
+        android:id="@+id/tv_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/_18_june_2019_1_13_pm"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentWeatherTemperatureTextView" />
 
     <TableLayout
         android:id="@+id/myTableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weather_condition"
         android:layout_marginTop="20dp"
-        android:background="@drawable/clear_day_bg_table">
+        android:background="@drawable/clear_day_bg_table"
+        app:layout_constraintTop_toBottomOf="@+id/tv_weather_condition">
+
         <TextView
-            android:textColor="@color/white"
-            android:textSize="18dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="  Detail"
+            android:text="@string/detail"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             android:textStyle="italic" />
+
         <TableRow>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -79,8 +96,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <ImageView
                 android:layout_width="45dp"
@@ -88,39 +104,40 @@
                 android:src="@drawable/ic_sunrise2" />
 
             <TextView
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:gravity="center"
                 android:id="@+id/tv_sunrise_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Первое слово\nВторое слово"
-                />
+                android:gravity="center"
+                android:text="@string/n"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#FFFFFF" />
+
             <ImageView
                 android:layout_width="72dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_sunset2" />
 
             <TextView
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:gravity="center"
                 android:id="@+id/tv_sunset_time"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="Sunset time" />
+                android:gravity="center"
+                android:text="@string/sunset_time"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
 
         </TableRow>
 
         <TableRow>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -134,21 +151,23 @@
                 android:layout_width="61dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_uv_index_max" />
+
             <TextView
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:gravity="center"
                 android:id="@+id/uv_index"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Ячейка 3" />
+                android:gravity="center"
+                android:text="@string/_3"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#FFFFFF" />
+
             <ImageView
                 android:layout_width="72dp"
                 android:layout_height="match_parent"
@@ -156,47 +175,37 @@
 
 
             <TextView
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:gravity="center"
                 android:id="@+id/rain_sum"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="Ячейка 4" />
+                android:gravity="center"
+                android:text="@string/_4"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
         </TableRow>
     </TableLayout>
-
-    <TextView
-        android:textSize="20dp"
-        android:textStyle="italic"
-        android:textColor="@color/white"
-        android:id="@+id/tv_date_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="18 June, 2019 1:13 PM"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeatherTemperatureTextView" />
 
     <TableLayout
         android:id="@+id/myTableLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/myTableLayout"
         android:layout_marginTop="50dp"
-        android:background="@drawable/clear_day_bg_table">
+        android:background="@drawable/clear_day_bg_table"
+        app:layout_constraintTop_toBottomOf="@+id/myTableLayout">
+
         <TextView
-            android:textSize="18dp"
-            android:textColor="@color/white"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="  Wind info"
+            android:text="@string/wind_info"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             android:textStyle="italic" />
+
         <TableRow>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -206,13 +215,13 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <ImageView
                 android:layout_width="72dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_windmill_blade" />
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
@@ -220,31 +229,26 @@
 
 
             <TextView
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:gravity="center"
                 android:id="@+id/currentWeatherWindSpeedTextView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/label_visibility" />
+                android:gravity="center"
+                android:text="@string/label_visibility"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <TextView
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:gravity="center"
                 android:id="@+id/currentWeatherWindDirectionTextView"
                 android:layout_width="10dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:text="@string/label_direction" />
-
+                android:gravity="center"
+                android:text="@string/label_direction"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
         </TableRow>
-
-
-
     </TableLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

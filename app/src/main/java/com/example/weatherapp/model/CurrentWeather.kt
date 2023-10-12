@@ -9,8 +9,8 @@ data class CurrentWeather(
     val sunrise: Long,
     val sunset: Long,
     val is_day: Int,
-    val relativehumidity_2m: Int, // Добавлено для Relative Humidity (2 m)
-    val pressure_msl: Double, // Добавлено для Sea Level Pressure
+    val relativehumidity_2m: Int,
+    val pressure_msl: Double,
     val weathercode: Int
 
 )
