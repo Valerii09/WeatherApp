@@ -9,6 +9,7 @@ data class DailyWeather(
     val winddirection_10m_dominant: List<Int>,
     val sunrise: List<Long>, // Добавлено для Sunrise
     val sunset:List<Long> ,
-    val uv_index_max: List<Double> // Добавлено для Sunset
+    val uv_index_max: List<Double>,
+    val rain_sum: List<Double>// Добавлено для Sunset
 
 )

@@ -1,200 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:orientation="vertical">
+    android:background="@drawable/clear_day_bg"
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_date_time"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:id="@+id/cityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
+        android:layout_marginTop="40dp"
+        android:text="Novosibirsk"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="18 June, 2019 1:13 PM" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="91dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityTextView"
+        app:srcCompat="@drawable/weather_icon_03d" />
 
     <TextView
         android:id="@+id/currentWeatherTemperatureTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:textSize="70sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_date_time"
-        tools:text="33" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/degree_celsius_symbol"
-        android:textColor="@color/colorPrimary"
-        android:textSize="35sp"
-        app:layout_constraintStart_toEndOf="@id/currentWeatherTemperatureTextView"
-        app:layout_constraintTop_toTopOf="@id/currentWeatherTemperatureTextView" />
-
-    <TextView
-        android:id="@+id/cityTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/currentWeatherTemperatureTextView"
-        tools:text="Dhaka, BD" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7044855" />
-
-    <ImageView
-        android:id="@+id/iv_weather_condition"
-        android:layout_width="109dp"
-        android:layout_height="82dp"
-        android:layout_marginTop="52dp"
-        android:contentDescription="@string/description_weather_condition_icon"
-        android:scaleType="centerCrop"
+        android:text="7.0 С"
+        android:textColor="@color/white"
+        android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/haze" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
+        android:textColor="@color/white"
         android:id="@+id/tv_weather_condition"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:text="Overcast clouds"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/iv_weather_condition"
-        tools:text="broken cloud" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_value_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="114dp" />
-
-
-    <TextView
-        android:id="@+id/tv_wind_speed"
-        style="@style/LabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="184dp"
-        android:text="@string/label_visibility"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_time" />
+
+    <TableLayout
+        android:id="@+id/myTableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_weather_condition"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/clear_day_bg_table">
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Detail"
+            android:textStyle="italic" />
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_sunrise2" />
+
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@+id/tv_sunrise_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Первое слово\nВторое слово"
+                />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF" />
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_sunset2" />
+
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@+id/tv_sunset_time"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Sunset time" />
+
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+        </TableRow>
+
+        <TableRow android:layout_height="48dp">
+
+            <ImageView
+                android:layout_width="61dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_uv_index_max" />
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@+id/uv_index"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Ячейка 3" />
+
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF" />
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_rain" />
+
+
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@+id/rain_sum"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Ячейка 4" />
+
+        </TableRow>
+    </TableLayout>
 
     <TextView
-        android:id="@+id/currentWeatherWindSpeedTextView"
-        style="@style/DefaultTextStyle"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+        android:id="@+id/tv_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guideline_value_start"
-        app:layout_constraintTop_toTopOf="@id/tv_wind_speed"
-        tools:text="4 km/h" />
-
-    <TextView
-        android:id="@+id/tv_wind_direction"
-        style="@style/LabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/label_direction"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/currentWeatherWindSpeedTextView" />
-
-    <TextView
-        android:id="@+id/currentWeatherWindDirectionTextView"
-        style="@style/DefaultTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guideline_value_start"
-        app:layout_constraintTop_toTopOf="@id/tv_wind_direction"
-        tools:text=" 0" />
-
-    <TextView
-        android:id="@+id/tv_sunrise_label"
-        style="@style/LabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="360dp"
-        android:text="@string/label_sunrise"
-        app:layout_constraintEnd_toEndOf="@id/iv_sunrise"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toStartOf="@id/iv_sunrise"
-        app:layout_constraintTop_toTopOf="@+id/tv_date_time" />
-
-    <ImageView
-        android:id="@+id/iv_sunrise"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_sunrise"
-        app:layout_constraintEnd_toStartOf="@id/iv_sunset"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sunrise_label" />
-
-    <TextView
-        android:id="@+id/tv_sunrise_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/iv_sunrise"
-        app:layout_constraintStart_toStartOf="@id/iv_sunrise"
-        app:layout_constraintTop_toBottomOf="@+id/iv_sunrise"
-        tools:text="5:11 AM" />
-
-    <TextView
-        android:id="@+id/tv_sunset_label"
-        style="@style/LabelStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="360dp"
-        android:text="@string/label_sunset"
-        app:layout_constraintEnd_toEndOf="@id/iv_sunset"
-        app:layout_constraintHorizontal_bias="0.605"
-        app:layout_constraintStart_toStartOf="@id/iv_sunset"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_sunset"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="36dp"
-        android:src="@drawable/ic_sunset"
+        android:layout_marginTop="12dp"
+        android:text="18 June, 2019 1:13 PM"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_sunrise"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sunset_label" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentWeatherTemperatureTextView" />
 
-    <TextView
-        android:id="@+id/tv_sunset_time"
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:id="@+id/myTableLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/iv_sunset"
-        app:layout_constraintHorizontal_bias="0.451"
-        app:layout_constraintStart_toStartOf="@id/iv_sunset"
-        app:layout_constraintTop_toBottomOf="@+id/iv_sunset"
-        tools:text="6:47 PM" />
+        app:layout_constraintTop_toBottomOf="@+id/myTableLayout"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/clear_day_bg_table">
+        <TextView
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Wind info"
+            android:textStyle="italic" />
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_windmill_blade" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF" />
+
+
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@+id/currentWeatherWindSpeedTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/label_visibility" />
+
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@+id/currentWeatherWindDirectionTextView"
+                android:layout_width="10dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="@string/label_direction" />
+
+
+        </TableRow>
+
+
+
+    </TableLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

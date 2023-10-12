@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -36,8 +37,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: WeatherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Скрывает статус-бар
+        // Скрыть статус-бар и не показывать его при потягивании шторки
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_main)
         val prefs: SharedPreferences = getSharedPreferences(PREFS_FILENAME, Context.MODE_PRIVATE)
         val savedDateTime = prefs.getString(KEY_CITY, null)
 
@@ -93,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val daily =
-            "weathercode,temperature_2m_max,apparent_temperature_max,windspeed_10m_max,winddirection_10m_dominant,sunrise,sunset,uv_index_max"
+            "weathercode,temperature_2m_max,apparent_temperature_max,windspeed_10m_max,winddirection_10m_dominant,sunrise,sunset,uv_index_max,rain_sum"
         val currentWeather = true
         val timeformat = "unixtime"
         val timezone = "GMT"
@@ -138,15 +148,8 @@ class MainActivity : AppCompatActivity() {
 
         // Установите отформатированную дату и время в TextView
         tvDateTime.text = formattedDateTime
-        val ivWeatherCondition = findViewById<ImageView>(R.id.iv_weather_condition)
 
-// Установите изображение программно
-        ivWeatherCondition.setImageResource(R.drawable.haze)
 
-        val weatherCode = Util.getWeatherInfo(weatherData.current_weather.weathercode)
-        val tvWeatherCondition = findViewById<TextView>(R.id.tv_weather_condition)
-        tvWeatherCondition.text = weatherCode
-        Log.d("WeatherApp", "Weathercode: $weatherCode")
 
 
         val currentWeatherTemperatureTextView =
@@ -158,13 +161,13 @@ class MainActivity : AppCompatActivity() {
         val currentWeatherWindSpeedTextView =
             findViewById<TextView>(R.id.currentWeatherWindSpeedTextView)
         val windSpeed = currentWeather.windspeed
-        currentWeatherWindSpeedTextView.text = "$windSpeed km/h"
+        currentWeatherWindSpeedTextView.text = "Wind speed\n$windSpeed km/h"
         Log.d("WeatherApp", "Wind Speed: $windSpeed")
 
         val currentWeatherWindDirectionTextView =
             findViewById<TextView>(R.id.currentWeatherWindDirectionTextView)
         val windDirection = currentWeather.winddirection
-        currentWeatherWindDirectionTextView.text = "$windDirection°"
+        currentWeatherWindDirectionTextView.text = "Wind direction\n$windDirection°"
         Log.d("WeatherApp", "Wind Direction: $windDirection")
 
         val dailyWeather2 = weatherData.daily
@@ -191,7 +194,7 @@ class MainActivity : AppCompatActivity() {
             val localTime = localFormatter.format(sunsetDate)
 
             val sunsetTextView2 = findViewById<TextView>(R.id.tv_sunrise_time)
-            sunsetTextView2.text = localTime
+            sunsetTextView2.text = "Sunrise\n$localTime"
             Log.d("WeatherApp", "Sunset time: $localTime")
         } catch (e: ParseException) {
             Log.d("WeatherApp", "Error parsing sunset time: ${e.message}")
@@ -221,12 +224,23 @@ class MainActivity : AppCompatActivity() {
             val localTime = localFormatter.format(sunsetDate)
 
             val sunsetTextView = findViewById<TextView>(R.id.tv_sunset_time)
-            sunsetTextView.text = localTime
+            sunsetTextView.text = "Sunset\n$localTime"
             Log.d("WeatherApp", "Sunset time: $localTime")
         } catch (e: ParseException) {
             Log.d("WeatherApp", "Error parsing sunset time: ${e.message}")
         }
 
+
+
+        val uv_index = dailyWeather.uv_index_max[7]
+        Log.d("WeatherApp", "uv_index: ${uv_index}")
+        val uv_indexTextView = findViewById<TextView>(R.id.uv_index)
+        uv_indexTextView.text = "UV index\n$uv_index"
+
+        val rain = dailyWeather.rain_sum[7]
+        Log.d("WeatherApp", "uv_index: ${rain}")
+        val rainTextView = findViewById<TextView>(R.id.rain_sum)
+        rainTextView.text = "Rain sum\n$rain"
 
 
     }
