@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                             editor.putString(KEY_CITY, city)
                             editor.apply()
                         } else {
-                            // Если город не найден
                         }
                         if (!continent.isNullOrBlank()) {
                             // Сохраняем континент в SharedPreferences
