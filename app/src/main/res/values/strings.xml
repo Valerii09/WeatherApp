@@ -15,9 +15,6 @@
     <string name="overcast_clouds">Overcast clouds</string>
     <string name="_18_june_2019_1_13_pm">18 June, 2019 1:13 PM</string>
     <string name="detail">Detail</string>
-    <string name="n">Первое слово\nВторое слово</string>
     <string name="sunset_time">Sunset time</string>
-    <string name="_3">Ячейка 3</string>
-    <string name="_4">Ячейка 4</string>
     <string name="wind_info">Wind info</string>
 </resources>
