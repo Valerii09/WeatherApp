@@ -55,6 +55,7 @@ class WeatherRepository {
                 Log.d("MyApp", "WeatherData: $weatherData")
                 return weatherData
             } else {
+
                 Log.w("MyApp", "Unsuccessful response: ${response.code}")
                 throw WeatherDataFetchException()
             }

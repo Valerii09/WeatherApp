@@ -1,7 +1,11 @@
 package com.example.weatherapp
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.widget.TextView
 import com.example.weatherapp.data.WeatherData
+import com.example.weatherapp.view.ErrorFragment
 import java.text.SimpleDateFormat
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -28,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        val errorContainer = findViewById<FrameLayout>(R.id.errorContainer)
+        val noInternetFragment = findViewById<FrameLayout>(R.id.noInternet)
         val repository = WeatherRepository()
         viewModel = ViewModelProvider(this, WeatherViewModelFactory(repository))
             .get(WeatherViewModel::class.java)
@@ -42,22 +48,26 @@ class MainActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
         progressBar.isIndeterminate = true // Запустить анимацию вращения
+        if (isInternetAvailable(this)) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val weatherData = viewModel.fetchWeatherData(latitude, longitude, apiKey)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val weatherData = viewModel.fetchWeatherData(latitude, longitude, apiKey)
 
 
-                runOnUiThread {
 
-                    updateUI(weatherData)
+                    runOnUiThread {
+                        updateUI(weatherData)
+                        progressBar.visibility = View.GONE
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    errorContainer.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                progressBar.visibility = View.GONE
-
             }
+        } else {
+            noInternetFragment.visibility = View.VISIBLE // Показать фрагмент, если нет интернета
         }
     }
 
@@ -120,6 +130,14 @@ class MainActivity : AppCompatActivity() {
         currentWeatherUVIndexTextView.text = "Atm pressure\n$pressure mmHg"
 
         cityTextView.text = weatherData.name
+    }
+
+    // Функция для проверки наличия интернет-соединения
+    fun isInternetAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+        return activeNetwork?.isConnected == true
     }
 }
 

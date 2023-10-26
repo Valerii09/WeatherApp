@@ -3,12 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/clear_day_bg">
 
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
     <TextView
         android:id="@+id/cityTextView"
@@ -264,5 +262,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/errorContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ExtraText"
+        android:visibility="gone">
+        <include layout="@layout/error_fragment" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/noInternet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ExtraText"
+        android:visibility="gone">
+        <include layout="@layout/no_internet" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
