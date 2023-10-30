@@ -15,5 +15,9 @@
     <style name="DefaultTextStyle" parent="TextAppearance.MaterialComponents.Body1">
 
     </style>
+    <style name="CustomProgressBar" parent="android:Widget.ProgressBar.Large">
+        <item name="android:indeterminateTint">@color/blue</item>
+    </style>
+
 
 </resources>

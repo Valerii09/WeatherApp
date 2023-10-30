@@ -278,7 +278,7 @@
         android:layout_height="match_parent"
         tools:ignore="ExtraText"
         android:visibility="gone">
-        <include layout="@layout/no_internet" />
+        <include layout="@layout/no_internet_fragment" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
