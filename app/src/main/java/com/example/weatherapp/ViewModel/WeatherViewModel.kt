@@ -3,8 +3,8 @@ package com.example.weatherapp.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.weatherapp.Repository.WeatherRepository
-import com.example.weatherapp.data.WeatherData
+import com.example.weatherapp.data.WeatherRepository
+import com.example.weatherapp.model.openWeather.WeatherData
 
 class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() {
     // LiveData для хранения данных о погоде

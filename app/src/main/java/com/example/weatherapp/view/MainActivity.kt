@@ -1,7 +1,6 @@
-package com.example.weatherapp
+package com.example.weatherapp.view
 
 import android.content.Context
-import android.location.Geocoder
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
@@ -11,19 +10,17 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatherapp.Repository.WeatherRepository
+import com.example.weatherapp.data.WeatherRepository
 import com.example.weatherapp.ViewModel.WeatherViewModel
 import com.example.weatherapp.ViewModel.WeatherViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.widget.TextView
-import android.widget.Toast
-import com.example.weatherapp.data.WeatherData
-import com.example.weatherapp.view.CitySelectionFragment
-import androidx.fragment.app.FragmentManager
+import com.example.weatherapp.R
+import com.example.weatherapp.model.openWeather.WeatherData
 import com.example.weatherapp.Service.Api.OnCitySelectedListener
-import java.io.IOException
+import com.example.weatherapp.ui.fragments.CitySelectionFragment
 import java.text.SimpleDateFormat
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -52,13 +49,10 @@ class MainActivity() : AppCompatActivity(), OnCitySelectedListener {
         val cityTextView = findViewById<TextView>(R.id.cityTextView)
         cityTextView.setOnClickListener {
             val citySelectionFragment = CitySelectionFragment()
-            citySelectionFragment.citySelectedListener = this // Устанавливаем текущую активность как слушателя
+            citySelectionFragment.citySelectedListener =
+                this // Устанавливаем текущую активность как слушателя
             citySelectionFragment.show(supportFragmentManager, "CitySelectionFragment")
         }
-
-
-
-
 
 
         val apiKey = "026e9642a6d0a86dc1e7bed4faa83fba"
@@ -129,13 +123,13 @@ class MainActivity() : AppCompatActivity(), OnCitySelectedListener {
         tvDateTime.text = formattedDateTime
 
         // Находим и устанавливаем текст в TextView для города
-       val cityTextView = findViewById<TextView>(R.id.cityTextView)
+        val cityTextView = findViewById<TextView>(R.id.cityTextView)
 //        cityTextView.setOnClickListener {
 //            val citySelectionFragment = CitySelectionFragment()
 //            citySelectionFragment.show(supportFragmentManager, "CitySelectionFragment")
 //        }
 //
-      cityTextView.text = weatherData.name
+        cityTextView.text = weatherData.name
 
         // Остальные TextView
         val currentWeatherTemperatureTextView =
@@ -158,15 +152,15 @@ class MainActivity() : AppCompatActivity(), OnCitySelectedListener {
         currentWeatherWindDirectionTextView.text = "Wind direction\n${weatherData.wind.deg}°"
         tvWeatherCondition.text = weatherData.weather[0].description
 
-    // Преобразование Кельвинов в градусы Цельсия
+        // Преобразование Кельвинов в градусы Цельсия
         val temperatureCelsius = (weatherData.main.temp - 273.15).roundToInt()
         currentWeatherTemperatureTextView.text = "$temperatureCelsius°C"
 
-    // Отображение влажности
+        // Отображение влажности
         val humidity = weatherData.main.humidity
         currentWeatherHumidityTextView.text = "Humidity\n$humidity%"
 
-    // Отображение времени восхода и заката
+        // Отображение времени восхода и заката
         val sunriseTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(
             Date((weatherData.sys.sunrise + weatherData.timezone) * 1000)
         )
@@ -176,7 +170,7 @@ class MainActivity() : AppCompatActivity(), OnCitySelectedListener {
         currentWeatherSunriseTextView.text = "Sunrise\n$sunriseTime"
         currentWeatherSunsetTextView.text = "Sunset\n$sunsetTime"
 
-    // Отображение давления
+        // Отображение давления
         val pressure = (weatherData.main.pressure * 0.75).roundToInt()
         currentWeatherUVIndexTextView.text = "Atm pressure\n$pressure mmHg"
 
@@ -217,7 +211,6 @@ class MainActivity() : AppCompatActivity(), OnCitySelectedListener {
             }
         }
     }
-
 
 
 }

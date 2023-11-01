@@ -1,4 +1,4 @@
-package com.example.weatherapp.view.geocoding
+package com.example.weatherapp.data
 
 import com.example.weatherapp.Service.Api.GeocodingService
 import retrofit2.Retrofit

@@ -1,4 +1,4 @@
-package com.example.weatherapp.view
+package com.example.weatherapp.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
@@ -13,9 +13,9 @@ import android.widget.EditText
 import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.example.weatherapp.Repository.OpenCageRepository
+import com.example.weatherapp.data.OpenCageRepository
 import com.example.weatherapp.Service.Api.OnCitySelectedListener
-import com.example.weatherapp.data.CountryUtils.Companion.isValidCountry
+import com.example.weatherapp.model.openWeather.CountryUtils.Companion.isValidCountry
 import kotlinx.coroutines.launch
 
 class CitySelectionFragment : DialogFragment() {

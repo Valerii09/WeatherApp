@@ -1,4 +1,4 @@
-package com.example.weatherapp.view.geocoding
+package com.example.weatherapp.model.geocoding
 
 data class GeocodingResult(
     val components: GeocodingComponents

@@ -1,8 +1,8 @@
-package com.example.weatherapp.Repository
+package com.example.weatherapp.data
 
 import android.util.Log
 import com.example.weatherapp.Exception.WeatherDataFetchException
-import com.example.weatherapp.data.WeatherData
+import com.example.weatherapp.model.openWeather.WeatherData
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

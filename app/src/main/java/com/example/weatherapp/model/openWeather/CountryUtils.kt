@@ -1,4 +1,4 @@
-package com.example.weatherapp.data
+package com.example.weatherapp.model.openWeather
 
 class CountryUtils {
     companion object {

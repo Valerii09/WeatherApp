@@ -1,12 +1,11 @@
-package com.example.weatherapp.Repository
+package com.example.weatherapp.data
 
 import android.net.Uri
 import android.util.Log
-import com.example.weatherapp.data.CountryUtils.Companion.getCountryCode
+import com.example.weatherapp.model.openWeather.CountryUtils.Companion.getCountryCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.Interceptor
-import okhttp3.OkHttpClient
 import okhttp3.OkHttpClient.*
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
