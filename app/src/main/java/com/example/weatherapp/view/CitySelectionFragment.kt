@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.weatherapp.Repository.OpenCageRepository
 import com.example.weatherapp.Service.Api.OnCitySelectedListener
+import com.example.weatherapp.data.CountryUtils.Companion.isValidCountry
 import kotlinx.coroutines.launch
 
 class CitySelectionFragment : DialogFragment() {
@@ -39,6 +40,9 @@ class CitySelectionFragment : DialogFragment() {
         confirmButton.setOnClickListener {
             val selectedCity = cityEditText.text.toString()
             val selectedCountry = countryEditText.text.toString()
+
+            if (isValidCountry(selectedCountry)) {
+
             lifecycleScope.launch {
                 val result = openCageRepository.geocodeCity(selectedCity, selectedCountry)
 
@@ -54,6 +58,13 @@ class CitySelectionFragment : DialogFragment() {
                     Toast.makeText(requireContext(), "Ошибка геокодирования", Toast.LENGTH_SHORT).show()
                 }
             }
+            } else {
+                // Страна введена неверно, выведите сообщение об ошибке
+                Toast.makeText(requireContext(), "Неправильное название страны", Toast.LENGTH_SHORT).show()
+            }
+
+
+
         }
 
         return rootView

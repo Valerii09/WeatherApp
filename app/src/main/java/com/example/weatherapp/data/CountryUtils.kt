@@ -220,5 +220,12 @@ class CountryUtils {
         fun getAllCountryCodes(): List<String> {
             return countries.values.toList()
         }
+
+        fun isValidCountry(countryName: String): Boolean {
+            val trimmedCountry = countryName.trim().lowercase()
+                .replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+            return countries.containsKey(trimmedCountry)
+        }
+
     }
 }
