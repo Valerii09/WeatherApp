@@ -2,6 +2,7 @@ package com.example.weatherapp.Repository
 
 import android.net.Uri
 import android.util.Log
+import com.example.weatherapp.data.CountryUtils.Companion.getCountryCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.Interceptor
@@ -25,11 +26,14 @@ class OpenCageRepository {
         })
         .build()
 
-    suspend fun geocodeCity(cityName: String): Pair<Double, Double>? {
+    suspend fun geocodeCity(cityName: String, countryName: String): Pair<Double, Double>? {
         try {
             val baseUrl = "https://api.opencagedata.com/geocode/v1/json"
             val apiKey = "74723a40510345568e67145a7679f85c"
-            val url = "$baseUrl?q=${Uri.encode(cityName)}&key=$apiKey"
+            val url =
+                "$baseUrl?q=${Uri.encode(cityName)}&key=$apiKey&no_annotations=1&abbrv=1&countrycode=${
+                    Uri.encode(getCountryCode(countryName))
+                }"
 
             val request = Request.Builder()
                 .url(url)
@@ -48,9 +52,14 @@ class OpenCageRepository {
                 val jsonObject = JSONObject(responseString)
                 val results = jsonObject.getJSONArray("results")
                 if (results.length() > 0) {
-                    val geometry = results.getJSONObject(0).getJSONObject("geometry")
+                    val geometry = results.getJSONObject(1).getJSONObject("geometry")
+                    val res = results.getJSONObject(3)
                     val lat = geometry.getDouble("lat")
                     val lng = geometry.getDouble("lng")
+                    Log.d("MyApp", "res: $res")
+                    Log.d("MyApp", "geometry: $geometry")
+                    Log.d("MyApp", "lat: $lat")
+                    Log.d("MyApp", "lng: $lng")
                     return Pair(lat, lng)
                 } else {
                     Log.w("MyApp", "No results found in the response.")
@@ -66,3 +75,4 @@ class OpenCageRepository {
         }
     }
 }
+//irkutsk

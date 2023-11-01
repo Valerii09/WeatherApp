@@ -32,7 +32,7 @@ import java.util.Date
 import java.util.Locale
 import kotlin.math.roundToInt
 
-class MainActivity : AppCompatActivity(), OnCitySelectedListener {
+class MainActivity() : AppCompatActivity(), OnCitySelectedListener {
     private lateinit var viewModel: WeatherViewModel
     private var newLatitude: Double = 0.0
     private var newLongitude: Double = 0.0
@@ -47,9 +47,19 @@ class MainActivity : AppCompatActivity(), OnCitySelectedListener {
 
         viewModel = ViewModelProvider(this, WeatherViewModelFactory(repository))
             .get(WeatherViewModel::class.java)
-        val citySelectionFragment = CitySelectionFragment()
-        citySelectionFragment.citySelectedListener = this // Устанавливаем текущую активность как слушателя
-        citySelectionFragment.show(supportFragmentManager, "CitySelectionFragment")
+
+
+        val cityTextView = findViewById<TextView>(R.id.cityTextView)
+        cityTextView.setOnClickListener {
+            val citySelectionFragment = CitySelectionFragment()
+            citySelectionFragment.citySelectedListener = this // Устанавливаем текущую активность как слушателя
+            citySelectionFragment.show(supportFragmentManager, "CitySelectionFragment")
+        }
+
+
+
+
+
 
         val apiKey = "026e9642a6d0a86dc1e7bed4faa83fba"
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
@@ -119,13 +129,13 @@ class MainActivity : AppCompatActivity(), OnCitySelectedListener {
         tvDateTime.text = formattedDateTime
 
         // Находим и устанавливаем текст в TextView для города
-        val cityTextView = findViewById<TextView>(R.id.cityTextView)
-        cityTextView.setOnClickListener {
-            val citySelectionFragment = CitySelectionFragment()
-            citySelectionFragment.show(supportFragmentManager, "CitySelectionFragment")
-        }
-
-        cityTextView.text = weatherData.name
+       val cityTextView = findViewById<TextView>(R.id.cityTextView)
+//        cityTextView.setOnClickListener {
+//            val citySelectionFragment = CitySelectionFragment()
+//            citySelectionFragment.show(supportFragmentManager, "CitySelectionFragment")
+//        }
+//
+      cityTextView.text = weatherData.name
 
         // Остальные TextView
         val currentWeatherTemperatureTextView =
