@@ -1,6 +1,8 @@
 package com.example.weatherapp.view
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +19,8 @@ import kotlinx.coroutines.launch
 class CitySelectionFragment : DialogFragment() {
     var citySelectedListener: OnCitySelectedListener? = null
     private lateinit var openCageRepository: OpenCageRepository
-
-
+    private var coordinatesReceived: Boolean = false
+    private lateinit var coordinates: Pair<Double, Double>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,13 +35,15 @@ class CitySelectionFragment : DialogFragment() {
 
         confirmButton.setOnClickListener {
             val selectedCity = cityEditText.text.toString()
-
-            // Запускаем сопрограмму для выполнения функции geocodeCity
             lifecycleScope.launch {
-                val coordinates = openCageRepository.geocodeCity(selectedCity)
+                val result = openCageRepository.geocodeCity(selectedCity)
 
-                if (coordinates != null) {
+                if (result != null) {
+                    coordinates = result
                     citySelectedListener?.onCoordinatesReceived(coordinates.first, coordinates.second)
+
+                    Log.d("CitySelectionFragment", "Coordinates: $coordinates")
+                    // Координаты установлены, не передавать сразу, а дождаться закрытия фрагмента
                     dismiss()
                 } else {
                     // Обработка ошибки геокодирования
@@ -50,6 +54,13 @@ class CitySelectionFragment : DialogFragment() {
 
         return rootView
     }
-}
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        if (coordinatesReceived) {
+            citySelectedListener?.onCoordinatesReceived(coordinates.first, coordinates.second)
+        }
+    }
+}
 

@@ -5,6 +5,7 @@ import android.location.Geocoder
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ProgressBar
@@ -33,7 +34,9 @@ import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity(), OnCitySelectedListener {
     private lateinit var viewModel: WeatherViewModel
-
+    private var newLatitude: Double = 0.0
+    private var newLongitude: Double = 0.0
+    private var isFragmentClosed: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,8 +44,12 @@ class MainActivity : AppCompatActivity(), OnCitySelectedListener {
         val errorContainer = findViewById<FrameLayout>(R.id.errorContainer)
         val noInternetFragment = findViewById<FrameLayout>(R.id.noInternet)
         val repository = WeatherRepository()
+
         viewModel = ViewModelProvider(this, WeatherViewModelFactory(repository))
             .get(WeatherViewModel::class.java)
+        val citySelectionFragment = CitySelectionFragment()
+        citySelectionFragment.citySelectedListener = this // Устанавливаем текущую активность как слушателя
+        citySelectionFragment.show(supportFragmentManager, "CitySelectionFragment")
 
         val apiKey = "026e9642a6d0a86dc1e7bed4faa83fba"
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
@@ -50,6 +57,7 @@ class MainActivity : AppCompatActivity(), OnCitySelectedListener {
         progressBar.isIndeterminate = true
 
         if (isInternetAvailable(this)) {
+
             // Запрос данных о погоде для заданных координат
             val latitude = 55.0415
             val longitude = 82.9346
@@ -71,6 +79,7 @@ class MainActivity : AppCompatActivity(), OnCitySelectedListener {
         } else {
             noInternetFragment.visibility = View.VISIBLE
         }
+
     }
 
     // Реализация интерфейса для обработки выбора города и обновления данных о погоде
@@ -78,10 +87,18 @@ class MainActivity : AppCompatActivity(), OnCitySelectedListener {
         val citySelectionFragment = CitySelectionFragment()
         citySelectionFragment.citySelectedListener = this
         citySelectionFragment.show(supportFragmentManager, "CitySelectionFragment")
+
     }
 
     override fun onCoordinatesReceived(latitude: Double, longitude: Double) {
-        updateWeatherData(latitude, longitude)
+        Log.d("MainActivity", "Received coordinates: $latitude, $longitude")
+        newLatitude = latitude
+        newLongitude = longitude
+        isFragmentClosed = true
+
+        if (isFragmentClosed) {
+            updateWeatherData(newLatitude, newLongitude)
+        }
     }
 
     private fun updateUI(weatherData: WeatherData) {
@@ -168,13 +185,12 @@ class MainActivity : AppCompatActivity(), OnCitySelectedListener {
         val errorContainer = findViewById<FrameLayout>(R.id.errorContainer)
         val noInternetFragment = findViewById<FrameLayout>(R.id.noInternet)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-
+        Log.d("updateWeatherData", "Coordinates: $latitude")
         // Показать фрагмент с прогресс баром
         progressBar.visibility = View.VISIBLE
         progressBar.isIndeterminate = true // Запустить анимацию вращения
 
         val apiKey = "026e9642a6d0a86dc1e7bed4faa83fba"
-        val repository = WeatherRepository()
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
